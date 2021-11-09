@@ -12,7 +12,7 @@ export const ProductList = () => {
             {products.map(product => {
                 return (
                     <Grid item key={product.id}>
-                        <ProductItem title={product.title} />
+                        <ProductItem {...product} />
                     </Grid>
                 )
             })}
