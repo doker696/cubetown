@@ -1,8 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import todosReducer from "./todoSlice";
+import productReducer from "./productSlice"
+
+const combine = combineReducers({todosReducer,productReducer})
 
 export const store = configureStore({
-    reducer: todosReducer,
+    reducer: combine,
 });
 
 export type AppDispatch = typeof store.dispatch;
