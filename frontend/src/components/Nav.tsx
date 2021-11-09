@@ -19,13 +19,12 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
     ...(open && {
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
-        marginLeft: 0,
+        marginLeft: `${drawerWidth}px`,
     }),
 }));
 
@@ -50,7 +49,7 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-export const Nav = ()=> {
+export const Nav = (props: any)=> {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [open, setOpen] = React.useState(false);
 
@@ -66,7 +65,7 @@ export const Nav = ()=> {
         setOpen( prevState => !prevState)
     }
     return <>
-        <AppBar position='static' >
+        <AppBar position='static' open={open}>
             <Toolbar>
                 <IconButton
                     size="large"
@@ -114,11 +113,12 @@ export const Nav = ()=> {
             </Toolbar>
         </AppBar>
         <Drawer variant={"persistent"}
-                sx={{width: 275,
+                sx={{width: drawerWidth,
                     flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: { width: 275, boxSizing: 'border-box' },
+                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
                 }}
                 open={open}
+                anchor={'left'}
         >
             <Box sx={{ overflow: 'auto' }}>
                 <List>
@@ -133,5 +133,9 @@ export const Nav = ()=> {
                 </List>
             </Box>
         </Drawer>
+
+        <Main open={open}>
+            {props.children}
+        </Main>
     </>
 }

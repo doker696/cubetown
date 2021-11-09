@@ -7,8 +7,9 @@ function App() {
   return (
     <div className="App">
         <CssBaseline/>
-        <Nav/>
-        <ProductList/>
+        <Nav>
+            <ProductList/>
+        </Nav>
     </div>
   );
 }
