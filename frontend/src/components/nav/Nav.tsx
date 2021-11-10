@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {IconButton, Menu, MenuItem, styled, Toolbar, Typography} from "@mui/material";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -50,22 +50,23 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export const Nav = (props: any)=> {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [open, setOpen] = React.useState(false);
-
+    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    const [openNav, setOpenNav] = useState(false);
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElNav(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorElNav(null);
     };
 
     const handleDrawer = () => {
-        setOpen( prevState => !prevState)
+        setOpenNav(prevState => !prevState)
     }
+
+
     return <>
-        <AppBar position='static' open={open}>
+        <AppBar position='static' open={openNav}>
             <Toolbar>
                 <IconButton
                     size="large"
@@ -94,7 +95,7 @@ export const Nav = (props: any)=> {
                 </IconButton>
                 <Menu
                     id="menu-appbar"
-                    anchorEl={anchorEl}
+                    anchorEl={anchorElNav}
                     anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'right',
@@ -104,7 +105,7 @@ export const Nav = (props: any)=> {
                         vertical: 'top',
                         horizontal: 'right',
                     }}
-                    open={Boolean(anchorEl)}
+                    open={Boolean(anchorElNav)}
                     onClose={handleClose}
                 >
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
@@ -117,7 +118,7 @@ export const Nav = (props: any)=> {
                     flexShrink: 0,
                     [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
                 }}
-                open={open}
+                open={openNav}
                 anchor={'left'}
         >
             <Box sx={{ overflow: 'auto' }}>
@@ -134,7 +135,7 @@ export const Nav = (props: any)=> {
             </Box>
         </Drawer>
 
-        <Main open={open}>
+        <Main open={openNav}>
             {props.children}
         </Main>
     </>

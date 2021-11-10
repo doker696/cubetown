@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {ProductList} from "./components/products/productList"
 import {Box, CssBaseline, Grid} from "@mui/material";
-import {Nav} from "./components/Nav";
+import {Nav} from "./components/nav/Nav";
 import {Filter} from "./components/Filter";
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Nav>
             <Grid container spacing={2}>
                 <Grid item xs={10}>
-                    {/*<ProductList/>*/}
+                    <ProductList/>
                 </Grid>
                 <Grid item xs={2}>
                     <Filter/>
